@@ -1,25 +1,38 @@
-# EcoTrace AI - Stateful Multi-Agent Sustainability Auditor
+# EcoTrace AI — Stateful Multi-Agent Sustainability Auditor
 
-EcoTrace AI is an autonomous, stateful multi-agent auditing framework that ingests unstructured supply chain documentation, evaluates lifecycle carbon footprints, and optimizes logistics routing for minimal environmental impact. 
+<p align="center">
+  <strong>Assemble, configure, and deploy autonomous sustainability AI Agent(s) in your browser.</strong>
+</p>
 
-The accompanying interactive dashboard provides deep visual insights into multi-agent operations, dynamic eco-safe navigation paths, and actionable carbon offset metrics.
-
----
-
-##  The Problem & The Solution
-*  **The Problem:** Corporate shipping fleets generate massive carbon footprints, but tracking these emissions requires digging through thousands of messy PDFs and shipping manifests. To make it worse, standard GPS apps route trucks straight into heavy traffic gridlocks, causing massive fuel waste and idling emissions.
-*  **The Solution:** EcoTrace AI automatically reads those messy files using smart AI agents, instantly calculates the carbon footprint, and acts as an "eco-friendly GPS" to redirect fleets onto low-emission routes. It even translates complex data into simple terms—like showing exactly how many trees you need to plant to cancel out your trip's pollution!
-
----
-
-##  What EcoTrace AI Does
-* **Automates Sustainability Audits:** Instead of compliance officers spending hours digging through chaotic shipping manifests, corporate PDFs, and supply chain CSVs, our AI agents parse and evaluate the data instantly.
-* **Calculates Real-World Footprints:** The system dynamically computes carbon footprint tonnage and maps out an immediate environmental offset score, translating abstract data into tangible impacts (like the exact number of trees needed to neutralize the emissions).
-* **Optimizes Fleet Navigation:** It doesn't just calculate data—it takes action. The framework looks beyond the shortest physical route to recommend eco-safe alternatives that bypass carbon-heavy traffic congestion grids.
+<p align="center">
+  <img src="https://img.shields.io/badge/python-%3E%3D3.10-green" alt="Python Version">
+  <img src="https://img.shields.io/badge/lang-English-blue" alt="Language English">
+  <img src="https://img.shields.io/badge/framework-LangGraph-orange" alt="LangGraph">
+  <img src="https://img.shields.io/badge/styling-TailwindCSS-brightgreen" alt="Tailwind CSS">
+</p>
 
 ---
 
-##  System Architecture & Tech Stack
+EcoTrace AI allows you to configure and deploy Autonomous AI agents to audit complex corporate supply chains. Supply chain managers can upload logistics data and have the system embark on carbon tracking goals. It attempts to reach the goal by orchestrating multiple specialized agents, thinking of tasks to do, executing them sequentially, and learning from the environmental results 🚀.
+
+---
+
+## ⚖️ The Problem & The Solution
+
+* ❌ **The Problem:** Corporate shipping fleets generate massive carbon footprints, but tracking these emissions requires digging through thousands of messy PDFs and shipping manifests. To make it worse, standard GPS apps route trucks straight into heavy traffic gridlocks, causing massive fuel waste and idling emissions.
+* 💡 **The Solution:** EcoTrace AI automatically reads those messy files using smart AI agents, instantly calculates the carbon footprint, and acts as an "eco-friendly GPS" to redirect fleets onto low-emission routes. It even translates complex data into simple terms—like showing exactly how many trees you need to plant to cancel out your trip's pollution!
+
+---
+
+## 💡 What EcoTrace AI Does
+
+* 🔐 **Automates Sustainability Audits:** Instead of compliance officers spending hours digging through chaotic shipping manifests, corporate PDFs, and supply chain CSVs, our AI agents parse and evaluate data instantly.
+* 🌲 **Calculates Real-World Footprints:** The system dynamically computes carbon footprint tonnage and maps out an immediate environmental offset score, translating abstract data into tangible impacts (like the exact number of trees needed to neutralize the emissions).
+* 📍 **Optimizes Fleet Navigation:** It doesn't just calculate data—it takes action. The framework looks beyond the shortest physical route to recommend eco-safe alternatives that bypass carbon-heavy traffic congestion grids.
+
+---
+
+## 🏗️ System Architecture & Tech Stack
 
 The application splits computational heavy lifting away from user experience using a modular local stack:
 * **Backend Core:** Python, FastAPI, and **LangGraph** orchestrating a stateful sequential agent loop (*Parser Agent* $\rightarrow$ *Emissions Agent* $\rightarrow$ *Navigator Agent*).
@@ -27,7 +40,7 @@ The application splits computational heavy lifting away from user experience usi
 
 ---
 
-##  Features & Implementation Updates
+## 🛠️ Features & Implementation Updates
 
 ### Frontend Core Interface
 * **Responsive Grid Scaling:** Reconfigured primary grid layout to support 3 equal dashboard pillars on desktop viewports using utility-first classes (`md:grid-cols-3`).
@@ -46,13 +59,38 @@ The application splits computational heavy lifting away from user experience usi
 
 ---
 
-##  Installation & Local Execution
+## 📦 Getting Started
 
-Follow these steps to initialize and run the EcoTrace AI system locally on your machine.
+The easiest way to get started with EcoTrace AI is by launching the local development environment bundled with the project. The layout sets up the following components:
 
-### 1. Initialize the Backend Brain
-Ensure you have Python 3.10+ installed. Open your terminal, navigate to the backend directory, install the required libraries, and boot up the server:
+* 🔑 **Environment Variables** (and API Keys)
+* ⚙️ **Backend** (FastAPI & LangGraph orchestrating stateful agents)
+* 🎨 **Frontend** (Vanilla HTML5 & Tailwind UI Dashboard)
+
+### Prerequisites ☝️
+
+Before you get started, please make sure you have the following installed:
+
+* An editor of your choice. For example, [Visual Studio Code (VS Code)](https://code.visualstudio.com/)
+* [Python 3.10+](https://www.python.org/)
+* Git
+
+---
+
+## 🚀 Getting Started Step-by-Step
+
+### 1. Open your editor
+
+### 2. Open the Terminal
+Typically, you can do this from a 'Terminal' tab or by using a shortcut (e.g., `Ctrl + ~` for Windows or `Control + ~` for Mac in VS Code).
+
+### 3. Clone the Repository and Navigate into the Directory
+Once your terminal is open, you can clone the repository and move into the directory by running the commands below.
+
+#### For Windows users 🪟
 ```bash
+git clone [https://github.com/kannssq/EcoTrace-AI.git](https://github.com/kannssq/EcoTrace-AI.git)
+cd EcoTrace-AI
 cd backend
 pip install -r requirements.txt
 uvicorn main:app --reload
