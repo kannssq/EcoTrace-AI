@@ -1,50 +1,45 @@
 # EcoTrace AI - Stateful Multi-Agent Sustainability Auditor
 
-# Walkthrough: Environmental Offset Dashboard Scorecard
+EcoTrace AI is an autonomous, stateful multi-agent auditing framework that ingests unstructured supply chain documentation, evaluates lifecycle carbon footprints, and optimizes logistics routing for minimal environmental impact. 
 
-I have successfully added the **Environmental Offset** scorecard metric and dynamic count-up animations to the dashboard.
-
-## Changes Made
-
-### Frontend
-
-#### [index.html](file:///c:/Users/Kanishk/OneDrive/Desktop/EcoTrace-AI/frontend/index.html)
-- Modified the grid to support 3 equal columns on desktop layouts using Tailwind (`md:grid-cols-3`).
-- Added the "Environmental Offset" card adjacent to the "Audit Efficiency Score" card.
-- Equipped the card with a clean green leaf icon (`text-green-400` with `bg-green-500/10` background) and the ID `#offset-value` for dynamic script updating.
-- Placed the small subtext `Trees required for 1-year offset` under the tree count.
-
-#### [script.js](file:///c:/Users/Kanishk/OneDrive/Desktop/EcoTrace-AI/frontend/script.js)
-- Selected the new `#offset-value` element from the DOM.
-- Created a custom easing count-up function (`animateCount`) to transition the scorecard numbers smoothly when results are ready.
-- Extracted the CO2 tonnage (`co2_tons`) from the emissions agent response.
-- Calculated the required mature trees: `Math.round(co2_tons * 45)`.
-- Applied the count-up animation to all three scorecard metrics:
-  - **CO2 Footprint**: counts up from 0 to 12.4 with float formatting.
-  - **Audit Efficiency Score**: counts up from 0 to 78 with percentage suffix.
-  - **Environmental Offset**: counts up from 0 to 558 with "Trees" suffix.
+The accompanying interactive dashboard provides deep visual insights into multi-agent operations, dynamic eco-safe navigation paths, and actionable carbon offset metrics.
 
 ---
 
-## Verification Results
+##  System Architecture & Tech Stack
 
-### End-to-End Test
-1. Started the FastAPI backend server on `http://127.0.0.1:8000`.
-2. Loaded the frontend interface.
-3. Triggered the multi-agent routing audit.
-4. Confirmed:
-   - The UI correctly displays the new metric scorecard styled with the green leaf icon.
-   - The calculations are accurate (`12.4 Tons * 45 = 558 Trees`).
-   - The numbers animate smoothly to their final targets as shown in the screenshot below.
+The application splits computational heavy lifting away from user experience using a modular local stack:
+* **Backend Core:** Python, FastAPI, and **LangGraph** orchestrating a stateful sequential agent loop (*Parser Agent* $\rightarrow$ *Emissions Agent* $\rightarrow$ *Navigator Agent*).
+* **Frontend UI:** Vanilla HTML5, JavaScript (ES6+ async/fetch), and Tailwind CSS for real-time telemetry streaming and dashboard rendering.
 
 ---
 
-## Visual Demonstration
+##  Features & Implementation Updates
 
-> [!NOTE]
-> Below is a visual representation of how the three dashboard scorecard metrics look in the updated dashboard layout.
+### Frontend Core Interface
+* **Responsive Grid Scaling:** Reconfigured primary grid layout to support 3 equal dashboard pillars on desktop viewports using utility-first classes (`md:grid-cols-3`).
+* **Environmental Offset Analytics:** Positioned a localized tracker card adjacent to the primary telemetry boards to surface tangible mitigation targets.
+* **Semantic Iconography & Target Mapping:** Deployed a visual tree leaf configuration (`text-green-400` inside a `bg-green-500/10` container) linked directly to a strict DOM identifier selector (`#offset-value`).
+* **Data Scoping Metadata:** Embedded descriptive target metadata (`"Trees required for 1-year offset"`) beneath the main evaluation panel integers.
 
-| Calculated CO2 Footprint | Audit Efficiency Score | Environmental Offset |
-| :--- | :--- | :--- |
-| **12.4 Tons** (Red Fire Icon) | **78%** (Green Check Icon) | **558 Trees** (Green Leaf Icon) |
-| *Calculated emissions* | *System efficiency* | *Trees required for 1-year offset* |
+### Dynamic Dashboard Scripting
+* **DOM Tracking Integrations:** Configured target array selectors to intercept incoming execution streams safely.
+* **Exponential Easing Animations:** Engineered a high-performance numerical scaling utility (`animateCount`) to transition scorecard totals from zero states smoothly once backend graph pipelines resolve.
+* **Telemetry Data Parsing:** Designed extraction layers to pull metric weights (`co2_tons`) directly out of the raw response payload.
+* **Targeted Animation Formats:**
+  * **CO2 Footprint:** Precision float calculation climbing from baseline to target weight strings.
+  * **Audit Efficiency Score:** Percentage-appended integer scaling to reflect dynamic graph operation accuracy.
+  * **Environmental Offset:** Localized math processing translating payload tonnage into required mature tree allocations.
+
+---
+
+##  Installation & Local Execution
+
+Follow these steps to initialize and run the EcoTrace AI system locally on your machine.
+
+### 1. Initialize the Backend Brain
+Ensure you have Python 3.10+ installed. Open your terminal, navigate to the backend directory, install the required libraries, and boot up the server:
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
