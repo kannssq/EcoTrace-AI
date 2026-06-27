@@ -6,6 +6,19 @@ The accompanying interactive dashboard provides deep visual insights into multi-
 
 ---
 
+##  The Problem & The Solution
+*  **The Problem:** Corporate shipping fleets generate massive carbon footprints, but tracking these emissions requires digging through thousands of messy PDFs and shipping manifests. To make it worse, standard GPS apps route trucks straight into heavy traffic gridlocks, causing massive fuel waste and idling emissions.
+*  **The Solution:** EcoTrace AI automatically reads those messy files using smart AI agents, instantly calculates the carbon footprint, and acts as an "eco-friendly GPS" to redirect fleets onto low-emission routes. It even translates complex data into simple terms—like showing exactly how many trees you need to plant to cancel out your trip's pollution!
+
+---
+
+##  What EcoTrace AI Does
+* **Automates Sustainability Audits:** Instead of compliance officers spending hours digging through chaotic shipping manifests, corporate PDFs, and supply chain CSVs, our AI agents parse and evaluate the data instantly.
+* **Calculates Real-World Footprints:** The system dynamically computes carbon footprint tonnage and maps out an immediate environmental offset score, translating abstract data into tangible impacts (like the exact number of trees needed to neutralize the emissions).
+* **Optimizes Fleet Navigation:** It doesn't just calculate data—it takes action. The framework looks beyond the shortest physical route to recommend eco-safe alternatives that bypass carbon-heavy traffic congestion grids.
+
+---
+
 ##  System Architecture & Tech Stack
 
 The application splits computational heavy lifting away from user experience using a modular local stack:
