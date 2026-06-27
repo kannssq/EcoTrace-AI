@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoTrace AI - Multi-Agent Route Auditor</title>
+  <!-- Google Fonts: Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Outfit', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <!-- Custom Scrollbar & Premium Micro-animations -->
+  <style>
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(51, 65, 85, 0.8);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(71, 85, 105, 0.9);
+    }
+    /* Pulse glow */
+    .pulse-glow {
+      animation: pulse-glow-anim 2s infinite alternate;
+    }
+    @keyframes pulse-glow-anim {
+      0% {
+        box-shadow: 0 0 5px rgba(16, 185, 129, 0.4);
+      }
+      100% {
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-950 via-slate-900 to-zinc-950 text-slate-100 min-h-full font-sans antialiased flex flex-col">
+
+  <!-- Header -->
+  <header class="border-b border-slate-800/80 bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <!-- SVG Logo -->
+        <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+          <svg class="h-6 w-6 text-slate-950" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-emerald-400 bg-clip-text text-transparent">EcoTrace AI</h1>
+          <p class="text-xs text-slate-400 font-medium">Multi-Agent Auditor & Smart Router</p>
+        </div>
+      </div>
+      <div class="flex items-center space-x-2">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+        </span>
+        <span class="text-xs font-semibold text-slate-400 tracking-wider uppercase">System Live</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col lg:flex-row gap-8">
+    
+    <!-- Left Column: Inputs & Console Logs -->
+    <div class="w-full lg:w-5/12 flex flex-col gap-6">
+      
+      <!-- Input Panel -->
+      <div class="bg-slate-900/40 border border-slate-800 rounded-2xl p-6 backdrop-blur-xl shadow-xl flex flex-col justify-between">
+        <div>
+          <h2 class="text-lg font-semibold text-slate-100 mb-2 flex items-center gap-2">
+            <svg class="h-5 w-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            Audit Configuration
+          </h2>
+          <p class="text-xs text-slate-400 mb-4">Input mock logistics documents below to feed into the multi-agent graph pipeline.</p>
+          
+          <label for="documents-input" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Source Documents</label>
+          <textarea id="documents-input" class="w-full h-32 bg-slate-950/70 border border-slate-800 focus:border-emerald-500/50 rounded-xl px-4 py-3 text-sm font-mono text-slate-300 placeholder-slate-600 focus:ring-1 focus:ring-emerald-500/50 outline-none resize-none transition-all duration-300" placeholder="One file name per line...">Logistics_Manifest_Q3.pdf
+Fleet_Emissions_Registry.csv
+Global_Delivery_Schedules.xlsx</textarea>
+        </div>
+        
+        <div class="mt-6">
+          <button id="audit-btn" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-bold py-3.5 px-6 rounded-xl shadow-lg transition-all duration-300 transform active:scale-95 flex items-center justify-center gap-3 group relative overflow-hidden">
+            <span class="absolute inset-0 w-full h-full bg-white/10 transform -skew-x-12 -translate-x-full group-hover:animate-[shine_0.75s_ease-in-out]"></span>
+            <svg id="btn-icon" class="h-5 w-5 animate-bounce group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            <span id="btn-text">Run Multi-Agent Audit</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Console Logs Panel -->
+      <div class="bg-slate-950/60 border border-slate-800 rounded-2xl p-6 flex-grow flex flex-col shadow-2xl relative">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-xs font-semibold text-slate-400 tracking-wider uppercase flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            Agent Execution Console
+          </h2>
+          <button id="clear-console" class="text-[10px] uppercase font-bold text-slate-500 hover:text-slate-300 transition-colors">Clear Console</button>
+        </div>
+        
+        <!-- Scrollable console area -->
+        <div id="console-logs" class="flex-grow h-64 lg:h-80 overflow-y-auto bg-slate-950 border border-slate-900 rounded-xl p-4 font-mono text-xs text-emerald-400/90 space-y-2.5 shadow-inner">
+          <div class="text-slate-500 italic">[System Status: Awaiting audit execution...]</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right Column: Results Dashboard -->
+    <div class="w-full lg:w-7/12 flex flex-col gap-6">
+      
+      <!-- Results Overview Cards (Emissions etc.) -->
+      <div id="overview-panel" class="hidden grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- CO2 Card -->
+        <div class="bg-slate-900/30 border border-slate-800/80 rounded-2xl p-5 backdrop-blur-xl flex items-center justify-between">
+          <div>
+            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Calculated CO2 Footprint</p>
+            <h3 id="co2-value" class="text-2xl font-bold mt-1 text-white">0.0 Tons</h3>
+          </div>
+          <div class="p-3 bg-red-500/10 rounded-xl text-red-400">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
+            </svg>
+          </div>
+        </div>
+        <!-- Efficiency Card -->
+        <div class="bg-slate-900/30 border border-slate-800/80 rounded-2xl p-5 backdrop-blur-xl flex items-center justify-between">
+          <div>
+            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Audit Efficiency Score</p>
+            <h3 id="efficiency-value" class="text-2xl font-bold mt-1 text-white">0%</h3>
+          </div>
+          <div class="p-3 bg-emerald-500/10 rounded-xl text-emerald-400">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+        </div>
+        <!-- Environmental Offset Card -->
+        <div class="bg-slate-900/30 border border-slate-800/80 rounded-2xl p-5 backdrop-blur-xl flex items-center justify-between">
+          <div>
+            <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Environmental Offset</p>
+            <h3 id="offset-value" class="text-2xl font-bold mt-1 text-white">0 Trees</h3>
+            <p id="offset-subtext" class="text-[10px] text-slate-500 mt-0.5">Trees required for 1-year offset</p>
+          </div>
+          <div class="p-3 bg-green-500/10 rounded-xl text-green-400">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 1 9.8a7 7 0 0 1-9 8.2zm0 0v-5" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Results Panel -->
+      <div class="bg-slate-900/40 border border-slate-800 rounded-2xl p-6 backdrop-blur-xl flex-grow flex flex-col shadow-xl">
+        <h2 class="text-lg font-semibold text-slate-100 mb-4 flex items-center gap-2">
+          <svg class="h-5 w-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+          </svg>
+          Audit Recommendation Routes
+        </h2>
+
+        <!-- Results dynamic container -->
+        <div id="results-panel" class="flex-grow flex flex-col justify-center items-center gap-6">
+          <!-- Default Empty State -->
+          <div id="empty-state" class="text-center py-16 px-4">
+            <div class="h-16 w-16 bg-slate-800/40 rounded-full flex items-center justify-center mx-auto mb-4 border border-slate-700/50">
+              <svg class="h-8 w-8 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+            </div>
+            <h3 class="text-sm font-semibold text-slate-300">No Audit Run Yet</h3>
+            <p class="text-xs text-slate-500 max-w-xs mx-auto mt-1">Configure your logistics documents on the left and start the multi-agent graph audit execution.</p>
+          </div>
+          
+          <!-- Route Cards will be rendered here -->
+          <div id="route-cards-container" class="hidden w-full flex flex-col gap-5">
+            <!-- Dynamically populated via script.js -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-900 bg-slate-950 py-4 text-center text-xs text-slate-600">
+    <div class="max-w-7xl mx-auto px-4">
+      &copy; 2026 EcoTrace AI Systems. Powered by LangGraph & FastAPI.
+    </div>
+  </footer>
+
+  <!-- Include Frontend Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
